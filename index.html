@@ -210,22 +210,21 @@
     min-height: 80px;
   }
 
-  .btn {
-    flex: 1;
-    max-width: 220px;
-    padding: clamp(14px, 3vw, 18px) clamp(18px, 4vw, 28px);
+.btn {
+    flex: 1; /* ده اللي بيخليهم قد بعض بالملي */
+    max-width: 180px; /* عرض مناسب للزرارين جنب بعض */
+    height: 55px; /* توحيد الطول */
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: none;
     border-radius: 50px;
     font-family: 'Tajawal', sans-serif;
-    font-size: clamp(1rem, 3.5vw, 1.25rem);
+    font-size: 1.1rem;
     font-weight: 900;
     cursor: pointer;
-    transition: transform 0.18s cubic-bezier(.34,1.56,.64,1), box-shadow 0.18s;
+    transition: transform 0.2s, box-shadow 0.2s;
     white-space: nowrap;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
-    position: relative;
-    overflow: hidden;
   }
 
   /* yes button */
