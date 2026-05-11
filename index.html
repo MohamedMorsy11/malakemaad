@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- هنا بنغير اسم التاب اللي بيظهر فوق في المتصفح -->
+    <title>ملك عماد 🐑✨</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: url('https://img.freepik.com/free-vector/cute-sheep-celebrating-eid-al-adha_23-2148547701.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            border: 5px solid #fce4ec;
+        }
+
+        /* تنسيق اسم ملك عماد */
+        .site-name {
+            font-size: 18px;
+            color: #d81b60;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        h1 { color: #4a2c2a; margin-bottom: 30px; font-size: 24px; }
+
+        .buttons { 
+            display: flex; 
+            gap: 20px; 
+            justify-content: center; 
+            position: relative; 
+            min-height: 60px; 
+            align-items: center;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        #yesBtn { background-color: #4CAF50; color: white; box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4); }
+        #yesBtn:hover { transform: scale(1.1); background-color: #45a049; }
+
+        #noBtn {
+            background-color: #f44336;
+            color: white;
+            position: absolute;
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- الاسم يظهر هنا كعنوان للموقع -->
+        <span class="site-name">💖 ملك عماد 💖</span>
+        <h1>تقبلي تبقي خروف عيد الأضحى بتاعي؟ 🐑</h1>
+        
+        <div class="buttons">
+            <button id="yesBtn" onclick="celebrate()">أيوة طبعاً! 😍</button>
+            <button id="noBtn" onmouseover="moveButton()" onclick="moveButton()">لأ 🏃‍♂️</button>
+        </div>
+    </div>
+
+    <script>
+        function celebrate() {
+            const duration = 7 * 1000;
+            const animationEnd = Date.now() + duration;
+            const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 1000 };
+
+            const interval = setInterval(function() {
+                const timeLeft = animationEnd - Date.now();
+                if (timeLeft <= 0) return clearInterval(interval);
+                
+                const particleCount = 50 * (timeLeft / duration);
+                confetti({...defaults, particleCount, origin: { x: Math.random(), y: Math.random() - 0.2 }});
+            }, 250);
+
+            alert("يا روحي! ملك عماد وافقت تبقى الخروف بتاعي! كل سنة وأنتي طيبة 🎈🐑❤️");
+        }
+
+        function moveButton() {
+            const btn = document.getElementById('noBtn');
+            const padding = 50; 
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth - padding);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight - padding);
+            
+            btn.style.position = 'fixed';
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+    </script>
+</body>
+</html>
