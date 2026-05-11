@@ -1,119 +1,630 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ملك عماد 🐑✨</title>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: url('https://pixabay.com/images/download/x-1649212_1920.jpg') no-repeat center center fixed;
-            background-size: cover;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow: hidden;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>عيد الأضحى المبارك 🐑</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<style>
+  :root {
+    --pink: #ff4da6;
+    --pink-light: #ff80c0;
+    --pink-deep: #e0006e;
+    --gold: #ffd700;
+    --gold-light: #ffe566;
+    --green: #00c853;
+    --purple: #9c27b0;
+    --glass-bg: rgba(255, 255, 255, 0.13);
+    --glass-border: rgba(255, 255, 255, 0.35);
+  }
 
-        .container {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 40px;
-            border-radius: 30px;
-            text-align: center;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-            border: 5px solid #fce4ec;
-            max-width: 90%;
-            width: 400px;
-        }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        .site-name {
-            font-size: 20px;
-            color: #d81b60;
-            font-weight: bold;
-            margin-bottom: 10px;
-            display: block;
-        }
+  body {
+    font-family: 'Tajawal', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    background: #0a0015;
+  }
 
-        h1 { color: #4a2c2a; margin-bottom: 40px; font-size: 22px; line-height: 1.5; }
+  /* ── Animated gradient sky ── */
+  .sky {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg,
+      #1a0035 0%, #2d006b 20%, #5c0080 40%,
+      #8b0050 60%, #c40055 80%, #ff4080 100%);
+    animation: skyShift 8s ease-in-out infinite alternate;
+    z-index: 0;
+  }
+  @keyframes skyShift {
+    0%   { filter: hue-rotate(0deg) brightness(1); }
+    50%  { filter: hue-rotate(20deg) brightness(1.15); }
+    100% { filter: hue-rotate(-15deg) brightness(0.9); }
+  }
 
-        /* تعديل منطقة الزراير عشان يبقوا جنب بعض */
-        .buttons-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px; /* المسافة بين الزرارين */
-            min-height: 80px;
-            position: relative;
-        }
+  /* ── Sparkling stars ── */
+  .stars {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+  .star {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    animation: twinkle var(--dur) ease-in-out infinite var(--delay);
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.1; transform: scale(0.8); }
+    50%       { opacity: 1;   transform: scale(1.4); }
+  }
 
-        button {
-            padding: 12px 25px;
-            font-size: 18px;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: 0.3s;
-            font-weight: bold;
-            min-width: 120px;
-        }
+  /* ── Floating balloons ── */
+  .balloons {
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .balloon {
+    position: absolute;
+    bottom: -120px;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    animation: floatUp var(--dur2) ease-in-out infinite var(--delay2);
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
+  }
+  @keyframes floatUp {
+    0%   { transform: translateY(0) rotate(-5deg); opacity: 0; }
+    10%  { opacity: 1; }
+    85%  { opacity: 1; }
+    100% { transform: translateY(-110vh) rotate(8deg); opacity: 0; }
+  }
 
-        #yesBtn { 
-            background-color: #4CAF50; 
-            color: white; 
-            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
-            z-index: 1;
-        }
+  /* ── Lanterns ── */
+  .lantern {
+    position: absolute;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    animation: sway 3s ease-in-out infinite var(--sw-delay);
+    transform-origin: top center;
+  }
+  @keyframes sway {
+    0%, 100% { transform: rotate(-8deg); }
+    50%       { transform: rotate(8deg); }
+  }
 
-        #noBtn {
-            background-color: #f44336;
-            color: white;
-            z-index: 10; /* عشان يفضل فوق أي حاجة تانية وهو بيهرب */
-        }
-    </style>
+  /* ── Main card ── */
+  .card-wrap {
+    position: relative;
+    z-index: 10;
+    width: min(92vw, 600px);
+    padding: 20px;
+  }
+
+  .card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border: 1.5px solid var(--glass-border);
+    border-radius: 32px;
+    padding: clamp(28px, 6vw, 56px) clamp(20px, 5vw, 48px);
+    box-shadow:
+      0 8px 64px rgba(255, 0, 120, 0.25),
+      0 2px 0 rgba(255,255,255,0.12) inset,
+      0 -2px 0 rgba(0,0,0,0.1) inset;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    animation: cardPulse 4s ease-in-out infinite;
+  }
+  @keyframes cardPulse {
+    0%, 100% { box-shadow: 0 8px 64px rgba(255,0,120,0.25), 0 2px 0 rgba(255,255,255,0.12) inset; }
+    50%       { box-shadow: 0 12px 80px rgba(255,80,0,0.35), 0 2px 0 rgba(255,255,255,0.18) inset; }
+  }
+
+  /* shimmer overlay on card */
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg,
+      transparent 0%, rgba(255,255,255,0.07) 40%,
+      rgba(255,255,255,0.13) 50%, transparent 60%);
+    animation: shimmer 3.5s linear infinite;
+    pointer-events: none;
+  }
+  @keyframes shimmer {
+    0%   { transform: translateX(-100%); }
+    100% { transform: translateX(200%); }
+  }
+
+  /* ── Title ── */
+  .title {
+    font-size: clamp(2rem, 7vw, 3.4rem);
+    font-weight: 900;
+    background: linear-gradient(135deg, #ff4da6, #ff80c0, #ff4da6, #e0006e);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: titleGlow 2.5s ease-in-out infinite alternate;
+    line-height: 1.3;
+    margin-bottom: 8px;
+    text-shadow: none;
+    filter: drop-shadow(0 0 12px rgba(255,77,166,0.7));
+  }
+  @keyframes titleGlow {
+    0%   { background-position: 0% 50%; filter: drop-shadow(0 0 8px rgba(255,77,166,0.6)); }
+    100% { background-position: 100% 50%; filter: drop-shadow(0 0 22px rgba(255,77,166,1)); }
+  }
+
+  /* ── Eid badge ── */
+  .eid-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #ffd700, #ff8c00);
+    color: #fff;
+    font-size: clamp(0.75rem, 2.5vw, 0.95rem);
+    font-weight: 700;
+    padding: 5px 18px;
+    border-radius: 50px;
+    margin-bottom: 24px;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 16px rgba(255,165,0,0.4);
+    animation: badgePop 1.2s cubic-bezier(.34,1.56,.64,1) both;
+  }
+  @keyframes badgePop {
+    from { transform: scale(0) rotate(-10deg); opacity: 0; }
+    to   { transform: scale(1) rotate(0deg);  opacity: 1; }
+  }
+
+  /* ── Question ── */
+  .question {
+    font-size: clamp(1.1rem, 4vw, 1.55rem);
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.95);
+    line-height: 1.7;
+    margin-bottom: 36px;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+    animation: fadeSlide 0.8s 0.3s ease both;
+  }
+  @keyframes fadeSlide {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Buttons ── */
+  .btn-row {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    position: relative;
+    min-height: 80px;
+  }
+
+  .btn {
+    flex: 1;
+    max-width: 220px;
+    padding: clamp(14px, 3vw, 18px) clamp(18px, 4vw, 28px);
+    border: none;
+    border-radius: 50px;
+    font-family: 'Tajawal', sans-serif;
+    font-size: clamp(1rem, 3.5vw, 1.25rem);
+    font-weight: 900;
+    cursor: pointer;
+    transition: transform 0.18s cubic-bezier(.34,1.56,.64,1), box-shadow 0.18s;
+    white-space: nowrap;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* yes button */
+  .btn-yes {
+    background: linear-gradient(135deg, #ff4da6 0%, #e0006e 50%, #ff4da6 100%);
+    background-size: 200%;
+    color: #fff;
+    box-shadow: 0 6px 30px rgba(255, 0, 110, 0.55);
+    animation: yesBreath 2s ease-in-out infinite;
+  }
+  .btn-yes:hover {
+    transform: scale(1.08) translateY(-3px);
+    box-shadow: 0 12px 40px rgba(255, 0, 110, 0.75);
+    background-position: right center;
+  }
+  .btn-yes:active { transform: scale(0.96); }
+  @keyframes yesBreath {
+    0%, 100% { box-shadow: 0 6px 30px rgba(255,0,110,0.55); }
+    50%       { box-shadow: 0 6px 44px rgba(255,0,110,0.85); }
+  }
+  .btn-yes::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.25) 50%, transparent 70%);
+    transform: translateX(-100%);
+    transition: transform 0.4s;
+  }
+  .btn-yes:hover::after { transform: translateX(100%); }
+
+  /* no button */
+  .btn-no {
+    background: linear-gradient(135deg, #444 0%, #222 100%);
+    color: rgba(255,255,255,0.7);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    position: absolute;
+    transition: left 0.05s, top 0.05s, right 0.05s, bottom 0.05s, transform 0.18s;
+  }
+
+  /* ── Decorative divider ── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0 0 28px;
+    color: rgba(255,255,255,0.35);
+    font-size: 1.2rem;
+  }
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  }
+
+  /* ── Bouncing sheep corner ── */
+  .sheep-corner {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    z-index: 20;
+    animation: sheepBounce 0.6s ease-in-out infinite alternate;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
+    cursor: default;
+  }
+  @keyframes sheepBounce {
+    0%   { transform: translateY(0) rotate(-5deg) scaleX(1); }
+    100% { transform: translateY(-18px) rotate(5deg) scaleX(-1); }
+  }
+
+  /* ── Crescent moon decoration ── */
+  .moon {
+    position: fixed;
+    top: 24px;
+    right: 28px;
+    font-size: clamp(2rem, 5vw, 3rem);
+    z-index: 20;
+    animation: moonFloat 4s ease-in-out infinite;
+    filter: drop-shadow(0 0 16px rgba(255,215,0,0.8));
+  }
+  @keyframes moonFloat {
+    0%, 100% { transform: translateY(0) rotate(-10deg); }
+    50%       { transform: translateY(-12px) rotate(10deg); }
+  }
+
+  /* ── Festive dots / confetti sprinkles ── */
+  .sprinkle {
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 3;
+    animation: sprinkleFloat var(--sp-dur) ease-in-out infinite var(--sp-delay) alternate;
+  }
+  @keyframes sprinkleFloat {
+    0%   { transform: translateY(0) rotate(0deg); opacity: 0.5; }
+    100% { transform: translateY(-30px) rotate(180deg); opacity: 1; }
+  }
+
+  /* ── Success overlay ── */
+  .success-msg {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(8px);
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.4s ease;
+  }
+  .success-msg.show { display: flex; }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  .success-inner {
+    background: linear-gradient(135deg, #1a0035, #3d0060);
+    border: 2px solid var(--glass-border);
+    border-radius: 28px;
+    padding: 48px 40px;
+    text-align: center;
+    max-width: 420px;
+    width: 90%;
+    box-shadow: 0 0 80px rgba(255,77,166,0.5);
+    animation: popIn 0.5s cubic-bezier(.34,1.56,.64,1) both;
+  }
+  @keyframes popIn {
+    from { transform: scale(0.5) rotate(-5deg); opacity: 0; }
+    to   { transform: scale(1) rotate(0deg); opacity: 1; }
+  }
+  .success-inner p {
+    font-size: clamp(1.2rem, 4.5vw, 1.7rem);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.7;
+    text-shadow: 0 0 20px rgba(255,77,166,0.8);
+    margin-bottom: 24px;
+  }
+  .close-btn {
+    background: linear-gradient(135deg, #ff4da6, #e0006e);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 12px 36px;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(255,0,110,0.5);
+    transition: transform 0.18s, box-shadow 0.18s;
+  }
+  .close-btn:hover { transform: scale(1.07); box-shadow: 0 8px 32px rgba(255,0,110,0.7); }
+</style>
 </head>
 <body>
 
-    <div class="container">
-        <span class="site-name">💖 ملك عماد 💖</span>
-        <h1>تقبلي تبقي خروف عيد الأضحى بتاعي؟ 🐑</h1>
-        
-        <div class="buttons-wrapper">
-            <button id="yesBtn" onclick="celebrate()">أيوة طبعاً!</button>
-            <button id="noBtn" onmouseover="moveButton()" onclick="moveButton()">لأ</button>
-        </div>
+<!-- Sky background -->
+<div class="sky"></div>
+
+<!-- Stars -->
+<div class="stars" id="stars"></div>
+
+<!-- Balloons -->
+<div class="balloons" id="balloons"></div>
+
+<!-- Sprinkles -->
+<div id="sprinkles"></div>
+
+<!-- Moon -->
+<div class="moon">🌙</div>
+
+<!-- Bouncing sheep -->
+<div class="sheep-corner">🐑</div>
+
+<!-- Main card -->
+<div class="card-wrap">
+  <!-- Lanterns above card -->
+  <div style="display:flex; justify-content:space-between; padding:0 10px; margin-bottom:8px;">
+    <div class="lantern" style="--sw-delay:0s">🪔</div>
+    <div class="lantern" style="--sw-delay:0.5s">🪔</div>
+    <div class="lantern" style="--sw-delay:1s">🪔</div>
+    <div class="lantern" style="--sw-delay:1.5s">🪔</div>
+    <div class="lantern" style="--sw-delay:0.8s">🪔</div>
+  </div>
+
+  <div class="card">
+    <div class="eid-badge">🌙 عيد الأضحى المبارك 🌙</div>
+    <div class="title">🌸 ملك عماد 🌸</div>
+
+    <div class="divider">
+      <div class="divider-line"></div>
+      <span>✨</span>
+      <div class="divider-line"></div>
     </div>
 
-    <script>
-        function celebrate() {
-            const duration = 7 * 1000;
-            const animationEnd = Date.now() + duration;
-            const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 1000 };
+    <div class="question">
+      تقبلي تبقي خروف عيد الأضحى بتاعي&nbsp;&nbsp;؟ 🐑👑
+    </div>
 
-            const interval = setInterval(function() {
-                const timeLeft = animationEnd - Date.now();
-                if (timeLeft <= 0) return clearInterval(interval);
-                const particleCount = 50 * (timeLeft / duration);
-                confetti({...defaults, particleCount, origin: { x: Math.random(), y: Math.random() - 0.2 }});
-            }, 250);
+    <!-- Buttons -->
+    <div class="btn-row" id="btnRow">
+      <button class="btn btn-yes" onclick="onYes()">أيوة طبعاً! 😍</button>
+      <button
+        class="btn btn-no"
+        id="noBtn"
+        onmouseover="escapeBtn(event)"
+        ontouchstart="escapeBtnTouch(event)"
+        onclick="return false;"
+      >لأ 🏃‍♂️</button>
+    </div>
+  </div>
+</div>
 
-            alert("يا روحي! ملك عماد وافقت تبقى الخروف بتاعي! كل سنة وأنتي طيبة 🎈🐑❤️");
-        }
+<!-- Success overlay -->
+<div class="success-msg" id="successMsg">
+  <div class="success-inner">
+    <div style="font-size:3.5rem; margin-bottom:16px;">❤️🎈🥳🐑</div>
+    <p>  !<br>كل سنة وأنتي طيبة يا قمر هههه ❤️🎈🥳🐑</p>
+    <button class="close-btn" onclick="closeSuccess()">💖تاني؟</button>
+  </div>
+</div>
 
-        function moveButton() {
-            const btn = document.getElementById('noBtn');
-            // بيطير في أي مكان في الشاشة بعيد عن مكانه الأصلي
-            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
-            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
-            
-            btn.style.position = 'fixed';
-            btn.style.left = x + 'px';
-            btn.style.top = y + 'px';
-        }
-    </script>
+<script>
+/* ── Stars ── */
+(function(){
+  const c = document.getElementById('stars');
+  for(let i=0;i<120;i++){
+    const s = document.createElement('div');
+    s.className = 'star';
+    const sz = Math.random()*3+1;
+    s.style.cssText = `
+      width:${sz}px; height:${sz}px;
+      left:${Math.random()*100}%;
+      top:${Math.random()*100}%;
+      --dur:${1.5+Math.random()*3}s;
+      --delay:${Math.random()*4}s;
+    `;
+    c.appendChild(s);
+  }
+})();
+
+/* ── Balloons ── */
+(function(){
+  const emojis = ['🎈','🎉','🎊','🎀','💖','🌟','🏮','🎁'];
+  const c = document.getElementById('balloons');
+  for(let i=0;i<18;i++){
+    const b = document.createElement('div');
+    b.className = 'balloon';
+    b.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    b.style.cssText = `
+      left:${Math.random()*100}%;
+      --dur2:${6+Math.random()*10}s;
+      --delay2:${Math.random()*12}s;
+    `;
+    c.appendChild(b);
+  }
+})();
+
+/* ── Sprinkles ── */
+(function(){
+  const colors=['#ff4da6','#ffd700','#00c853','#40c4ff','#e040fb','#ff6d00'];
+  const c = document.getElementById('sprinkles');
+  for(let i=0;i<30;i++){
+    const s = document.createElement('div');
+    s.className = 'sprinkle';
+    const sz = 4+Math.random()*8;
+    s.style.cssText = `
+      width:${sz}px; height:${sz}px;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      left:${Math.random()*100}%;
+      top:${Math.random()*100}%;
+      --sp-dur:${2+Math.random()*3}s;
+      --sp-delay:${Math.random()*3}s;
+    `;
+    c.appendChild(s);
+  }
+})();
+
+/* ── No button escape ── */
+const noBtn = document.getElementById('noBtn');
+const row   = document.getElementById('btnRow');
+
+function getRandomPos() {
+  const rW = row.offsetWidth;
+  const rH = row.offsetHeight;
+  const bW = noBtn.offsetWidth;
+  const bH = noBtn.offsetHeight;
+  // Place within card-wrap bounds
+  const cardW = document.querySelector('.card-wrap').offsetWidth;
+  const maxX = Math.min(rW - bW, cardW - bW - 30);
+  const x = Math.floor(Math.random() * Math.max(maxX, bW));
+  const yRange = 200;
+  const y = Math.floor(Math.random() * yRange) - yRange/2;
+  return { x, y };
+}
+
+let noBtnX = null, noBtnY = null;
+
+function initNoBtnPos() {
+  if (noBtnX === null) {
+    // Start: place beside yes button naturally (absolute within row)
+    const yesBtn = row.querySelector('.btn-yes');
+    const yesBtnRect = yesBtn.getBoundingClientRect();
+    const rowRect = row.getBoundingClientRect();
+    noBtnX = yesBtnRect.right - rowRect.left + 20;
+    noBtnY = (rowRect.height - noBtn.offsetHeight) / 2;
+    noBtn.style.left = noBtnX + 'px';
+    noBtn.style.top  = noBtnY + 'px';
+  }
+}
+
+window.addEventListener('load', () => {
+  // Make btn-row relative for absolute no button
+  row.style.position = 'relative';
+  noBtn.style.position = 'absolute';
+  initNoBtnPos();
+  noBtn.style.left = noBtnX + 'px';
+  noBtn.style.top  = noBtnY + 'px';
+  // Reserve row height
+  const yesH = row.querySelector('.btn-yes').offsetHeight;
+  row.style.minHeight = (yesH + 60) + 'px';
+});
+
+function escapeBtn(e) {
+  const pos = getRandomPos();
+  noBtnX = pos.x;
+  noBtnY = pos.y;
+  noBtn.style.left = noBtnX + 'px';
+  noBtn.style.top  = noBtnY + 'px';
+}
+
+function escapeBtnTouch(e) {
+  e.preventDefault();
+  escapeBtn(e);
+}
+
+/* ── Yes button ── */
+function onYes() {
+  // Massive fireworks + confetti
+  const duration = 5000;
+  const end = Date.now() + duration;
+
+  const colors = ['#ff4da6','#ffd700','#00c853','#40c4ff','#e040fb','#ff6d00','#fff'];
+
+  function frame() {
+    confetti({
+      particleCount: 12,
+      angle: 60,
+      spread: 80,
+      origin: { x: 0, y: 0.6 },
+      colors,
+      scalar: 1.3,
+    });
+    confetti({
+      particleCount: 12,
+      angle: 120,
+      spread: 80,
+      origin: { x: 1, y: 0.6 },
+      colors,
+      scalar: 1.3,
+    });
+    if (Date.now() < end) requestAnimationFrame(frame);
+  }
+
+  // Burst from center
+  confetti({
+    particleCount: 180,
+    spread: 120,
+    origin: { x: 0.5, y: 0.55 },
+    colors,
+    scalar: 1.5,
+    startVelocity: 55,
+    gravity: 0.85,
+    ticks: 300,
+  });
+  confetti({
+    particleCount: 100,
+    spread: 360,
+    startVelocity: 30,
+    origin: { x: 0.5, y: 0.5 },
+    colors,
+    scalar: 1.2,
+    shapes: ['star'],
+  });
+
+  frame();
+
+  setTimeout(() => {
+    document.getElementById('successMsg').classList.add('show');
+    // Extra burst when overlay shows
+    confetti({ particleCount: 120, spread: 80, origin: { x: 0.5, y: 0.4 }, colors, scalar: 1.4 });
+  }, 400);
+}
+
+function closeSuccess() {
+  document.getElementById('successMsg').classList.remove('show');
+  // one more little burst
+  confetti({ particleCount: 60, spread: 60, origin: { x: 0.5, y: 0.6 }, colors:['#ff4da6','#ffd700'] });
+}
+</script>
 </body>
 </html>
