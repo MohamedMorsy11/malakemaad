@@ -14,14 +14,16 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: url('https://www.vetogate.com/Upload/libfiles/450/9/545.jfif.jpg') no-repeat center center fixed;
+            /* تم تغيير الرابط لصورة عالية الجودة */
+            background: url('https://images.unsplash.com/photo-1511117833452-482a71c99e4a?q=80&w=2070&auto=format&fit=crop') no-repeat center center fixed;
             background-size: cover;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow: hidden;
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(5px); /* تأثير زجاجي شيك */
             padding: 40px;
             border-radius: 30px;
             text-align: center;
@@ -32,21 +34,21 @@
         }
 
         .site-name {
-            font-size: 20px;
+            font-size: 22px;
             color: #d81b60;
             font-weight: bold;
             margin-bottom: 10px;
             display: block;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
 
-        h1 { color: #4a2c2a; margin-bottom: 40px; font-size: 22px; line-height: 1.5; }
+        h1 { color: #4a2c2a; margin-bottom: 40px; font-size: 24px; line-height: 1.5; }
 
-        /* تعديل منطقة الزراير عشان يبقوا جنب بعض */
         .buttons-wrapper {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 20px; /* المسافة بين الزرارين */
+            gap: 20px;
             min-height: 80px;
             position: relative;
         }
@@ -60,19 +62,17 @@
             transition: 0.3s;
             font-weight: bold;
             min-width: 120px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
-        #yesBtn { 
-            background-color: #4CAF50; 
-            color: white; 
-            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
-            z-index: 1;
-        }
+        #yesBtn { background-color: #4CAF50; color: white; }
+        #yesBtn:hover { transform: scale(1.1); background-color: #45a049; }
 
         #noBtn {
             background-color: #f44336;
             color: white;
-            z-index: 10; /* عشان يفضل فوق أي حاجة تانية وهو بيهرب */
+            position: absolute;
+            z-index: 10;
         }
     </style>
 </head>
@@ -101,15 +101,15 @@
                 confetti({...defaults, particleCount, origin: { x: Math.random(), y: Math.random() - 0.2 }});
             }, 250);
 
-            alert("كل سنة وأنتي طيبة يا قمر ههههه 🎈🐑❤️");
+            setTimeout(() => {
+                alert("يا روحي! ملك عماد وافقت تبقى الخروف بتاعي! كل سنة وأنتي طيبة 🎈🐑❤️");
+            }, 500);
         }
 
         function moveButton() {
             const btn = document.getElementById('noBtn');
-            // بيطير في أي مكان في الشاشة بعيد عن مكانه الأصلي
             const x = Math.random() * (window.innerWidth - btn.offsetWidth);
             const y = Math.random() * (window.innerHeight - btn.offsetHeight);
-            
             btn.style.position = 'fixed';
             btn.style.left = x + 'px';
             btn.style.top = y + 'px';
