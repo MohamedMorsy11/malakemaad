@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ملك عماد 🐑✨</title>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <title>🎈 ملك عماد - عيد سعيد 🐑</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         body {
             margin: 0;
@@ -14,90 +14,109 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            /* صورة فيها بلالين واحتفال وألوان مبهجة جداً */
-            background: url('https://img.freepik.com/free-vector/birthday-party-background-with-balloons-confetti_1017-31368.jpg') no-repeat center center fixed;
+            /* صورة خلفية فخمة ومبهجة لعيد الأضحى (صورة عالية الجودة) */
+            background: url('https://pixabay.com/images/download/x-1649212_1920.jpg') no-repeat center center fixed;
             background-size: cover;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow: hidden;
+            color: #333;
         }
 
-        /* إضافة صورة خروف صغير بيتحرك كديكور */
+        /* حاوية الخروف الطائر (المفاجأة 1) */
         body::after {
-            content: '🐑';
+            content: '🐑🎈';
             position: absolute;
             bottom: 20px;
             right: 20px;
-            font-size: 50px;
-            animation: bounce 2s infinite;
+            font-size: 60px;
+            animation: bounce 2.5s infinite;
+            z-index: 10;
         }
 
         @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-30px) rotate(15deg); }
         }
 
-        .container {
+        /* الكارت الأبيض (الحاوية) */
+        .card {
             background: rgba(255, 255, 255, 0.95);
-            padding: 40px;
-            border-radius: 30px;
+            padding: 50px;
+            border-radius: 40px;
             text-align: center;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-            border: 6px solid #ffeb3b; /* برواز أصفر مبهج */
-            max-width: 85%;
-            width: 450px;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+            border: 8px solid #ffeb3b; /* برواز أصفر مبهج جداً */
+            max-width: 90%;
+            width: 500px;
             position: relative;
-            z-index: 2;
+            z-index: 5;
+            transition: transform 0.3s ease;
+        }
+
+        /* تأثير اهتزاز الكارت (المفاجأة 2) */
+        .card.celebrate-card {
+            animation: shakeCard 0.5s ease;
+        }
+
+        @keyframes shakeCard {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
         }
 
         .site-name {
-            font-size: 26px;
-            color: #e91e63;
+            font-size: 30px;
+            color: #d81b60; /* لون وردي قوي */
             font-weight: 900;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             display: block;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
 
         h1 { 
-            color: #333; 
-            margin-bottom: 40px; 
-            font-size: 28px; 
+            color: #4a2c2a; 
+            margin-bottom: 50px; 
+            font-size: 32px; 
             line-height: 1.4;
             font-weight: 800;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
         }
 
+        /* حاوية الزراير - جنب بعض بقوة */
         .buttons-wrapper {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 25px;
-            min-height: 100px;
+            gap: 30px; /* مسافة واضحة بين الزرارين */
+            min-height: 120px;
             position: relative;
         }
 
         button {
-            padding: 15px 35px;
-            font-size: 20px;
+            padding: 18px 40px;
+            font-size: 22px;
             border: none;
-            border-radius: 50px;
+            border-radius: 60px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.2s ease-in-out;
             font-weight: bold;
-            min-width: 140px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+            min-width: 160px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            border: 2px solid #fff; /* برواز ذهبي رفيع */
         }
 
         #yesBtn { 
-            background: linear-gradient(45deg, #FF5252, #FF4081);
+            background: linear-gradient(135deg, #4CAF50, #2E7D32); /* تدرج أخضر فخم */
             color: white; 
         }
         
         #yesBtn:hover { 
-            transform: scale(1.1) rotate(-3deg); 
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(76, 175, 80, 0.5);
         }
 
         #noBtn {
-            background: #9e9e9e;
+            background: linear-gradient(135deg, #f44336, #c62828); /* تدرج أحمر قوي */
             color: white;
             position: absolute;
             z-index: 1000;
@@ -106,49 +125,47 @@
 </head>
 <body>
 
-    <div class="container">
-        <span class="site-name">🎈 ملك عماد 🎈</span>
-        <h1>تقبلي تبقي خروف العيد بتاعي وبتاع قلبي؟ 🐑❤️</h1>
+    <div class="card" id="card">
+        <span class="site-name">🌸 ملـك عمـاد 🌸</span>
+        <h1>تقبلي تبقي خروف عيد الأضحى بتاعي وتبقى ملكة قلبي؟ 🐑👑</h1>
         
         <div class="buttons-wrapper">
-            <button id="yesBtn" onclick="celebrate()">أيوة طبعاً! ✨</button>
-            <button id="noBtn" onmouseover="moveButton()" onclick="moveButton()">لأ 🏃‍♀️</button>
+            <button id="yesBtn" onclick="startFireworks()">أيوة طبعاً! 😍</button>
+            <button id="noBtn" onmouseover="escapeButton()" onclick="escapeButton()">لأ</button>
         </div>
     </div>
 
     <script>
-        function celebrate() {
-            // انفجار بلالين وزينة في كل حتة
-            var end = Date.now() + (10 * 1000);
-            var colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+        function startFireworks() {
+            // إضافة اهتزاز للكارت
+            document.getElementById('card').classList.add('celebrate-card');
 
-            (function frame() {
-                confetti({
-                    particleCount: 7,
-                    angle: 60,
-                    spread: 80,
-                    origin: { x: 0 },
-                    colors: colors
-                });
-                confetti({
-                    particleCount: 7,
-                    angle: 120,
-                    spread: 80,
-                    origin: { x: 1 },
-                    colors: colors
-                });
+            // تأثير الألعاب النارية (Fireworks) - أقوى من الConfetti
+            const duration = 10 * 1000; // 10 ثواني احتفال
+            const animationEnd = Date.now() + duration;
+            const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
 
-                if (Date.now() < end) {
-                    requestAnimationFrame(frame);
-                }
-            }());
+            const interval = setInterval(function() {
+                const timeLeft = animationEnd - Date.now();
+                if (timeLeft <= 0) return clearInterval(interval);
+                
+                const particleCount = 50 * (timeLeft / duration);
+                // انفجارات عشوائية في كل حتة
+                confetti({...defaults, particleCount, origin: { x: Math.random(), y: Math.random() - 0.2 }, colors: ['#ff4081', '#ffeb3b', '#4CAF50', '#2196f3', '#fff'] });
+                confetti({...defaults, particleCount, origin: { x: Math.random(), y: Math.random() - 0.2 }, colors: ['#d32f2f', '#fb8c00'] });
+            }, 250);
+
+            // بعد دقيقتين، شيل الshake
+            setTimeout(() => {
+                document.getElementById('card').classList.remove('celebrate-card');
+            }, 1000);
 
             setTimeout(() => {
-                alert("يا روحي يا ملوكة! العيد أحلى بيكي.. كل سنة وأنتي طيبة يا أحلى خروف في المجرة! 🎈🐑🥳");
-            }, 500);
+                alert("يا روح قلبي! ملوكة قالت أيوة! كل سنة وأنتي طيبة ومالية حياتي عيد! ❤️🎈🥳🐑");
+            }, 1000);
         }
 
-        function moveButton() {
+        function escapeButton() {
             const btn = document.getElementById('noBtn');
             // سرعة الهروب
             const x = Math.random() * (window.innerWidth - btn.offsetWidth - 50);
