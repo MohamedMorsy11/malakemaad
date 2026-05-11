@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- هنا بنغير اسم التاب اللي بيظهر فوق في المتصفح -->
     <title>ملك عماد 🐑✨</title>
-    
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         body {
@@ -29,60 +27,64 @@
             text-align: center;
             box-shadow: 0 15px 35px rgba(0,0,0,0.3);
             border: 5px solid #fce4ec;
+            max-width: 90%;
+            width: 400px;
         }
 
-        /* تنسيق اسم ملك عماد */
         .site-name {
-            font-size: 18px;
+            font-size: 20px;
             color: #d81b60;
             font-weight: bold;
             margin-bottom: 10px;
             display: block;
         }
 
-        h1 { color: #4a2c2a; margin-bottom: 30px; font-size: 24px; }
+        h1 { color: #4a2c2a; margin-bottom: 40px; font-size: 22px; line-height: 1.5; }
 
-        .buttons { 
-            display: flex; 
-            gap: 20px; 
-            justify-content: center; 
-            position: relative; 
-            min-height: 60px; 
+        /* تعديل منطقة الزراير عشان يبقوا جنب بعض */
+        .buttons-wrapper {
+            display: flex;
+            justify-content: center;
             align-items: center;
+            gap: 20px; /* المسافة بين الزرارين */
+            min-height: 80px;
+            position: relative;
         }
 
         button {
-            padding: 15px 30px;
+            padding: 12px 25px;
             font-size: 18px;
             border: none;
             border-radius: 50px;
             cursor: pointer;
             transition: 0.3s;
             font-weight: bold;
-            white-space: nowrap;
+            min-width: 120px;
         }
 
-        #yesBtn { background-color: #4CAF50; color: white; box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4); }
-        #yesBtn:hover { transform: scale(1.1); background-color: #45a049; }
+        #yesBtn { 
+            background-color: #4CAF50; 
+            color: white; 
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+            z-index: 1;
+        }
 
         #noBtn {
             background-color: #f44336;
             color: white;
-            position: absolute;
-            z-index: 999;
+            z-index: 10; /* عشان يفضل فوق أي حاجة تانية وهو بيهرب */
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- الاسم يظهر هنا كعنوان للموقع -->
         <span class="site-name">💖 ملك عماد 💖</span>
         <h1>تقبلي تبقي خروف عيد الأضحى بتاعي؟ 🐑</h1>
         
-        <div class="buttons">
-            <button id="yesBtn" onclick="celebrate()">أيوة طبعاً! 😍</button>
-            <button id="noBtn" onmouseover="moveButton()" onclick="moveButton()">لأ 🏃‍♂️</button>
+        <div class="buttons-wrapper">
+            <button id="yesBtn" onclick="celebrate()">أيوة طبعاً!</button>
+            <button id="noBtn" onmouseover="moveButton()" onclick="moveButton()">لأ</button>
         </div>
     </div>
 
@@ -95,7 +97,6 @@
             const interval = setInterval(function() {
                 const timeLeft = animationEnd - Date.now();
                 if (timeLeft <= 0) return clearInterval(interval);
-                
                 const particleCount = 50 * (timeLeft / duration);
                 confetti({...defaults, particleCount, origin: { x: Math.random(), y: Math.random() - 0.2 }});
             }, 250);
@@ -105,9 +106,9 @@
 
         function moveButton() {
             const btn = document.getElementById('noBtn');
-            const padding = 50; 
-            const x = Math.random() * (window.innerWidth - btn.offsetWidth - padding);
-            const y = Math.random() * (window.innerHeight - btn.offsetHeight - padding);
+            // بيطير في أي مكان في الشاشة بعيد عن مكانه الأصلي
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
             
             btn.style.position = 'fixed';
             btn.style.left = x + 'px';
